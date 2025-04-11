@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        double interest; //declare interest
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("WWelcome to Financial Calculator!\n" +
                 "Which calculator would you like to use?\n" +
@@ -13,11 +15,11 @@ public class Main {
         switch (givenCommand){
             case 1: //Mortgage Calculator
                 System.out.print("\nWelcome to Mortgage Calculator!" +
-                        "\nWhat is your principal: ");
+                        "\nWhat is your principal: $");
                 double principal = scanner.nextDouble(); //user input principal val
 
                 System.out.print("What is your interest rate (percentage without %): ");
-                double interest = scanner.nextDouble(); //user input interest val
+                interest = scanner.nextDouble(); //user input interest val
                 interest = interest / 100; //convert interest from % to decimal
 
                 System.out.print("What is your loan length: ");
@@ -31,12 +33,25 @@ public class Main {
                 System.out.printf("\nYour expected total interest paid: $%.2f", totalInterest);
                 break;
             case 2: //Future Value for CD
+                System.out.print("\nWelcome to Future Value for CD!" +
+                        "\nWhat is your deposit: $");
+                double deposit = scanner.nextDouble(); //user input deposit val
+
+                System.out.print("What is your interest rate (percentage without %): ");
+                interest = scanner.nextDouble();
+                interest = interest / 100; //convert interest from % to decimal
+
+                System.out.print("How many years: ");
+                int userYrs = scanner.nextInt(); //user input year val
+
+                double futureValue = deposit * Math.pow((1 + (interest/365)),(365*userYrs));
+                double totalInterestEarned = futureValue - deposit;
+
+                System.out.printf("Your Future Value: $%.2f", futureValue);
+                System.out.printf("\nTotal Interest Earned: $%.2f", totalInterestEarned);
                 break;
             default:
                 System.out.println("Invalid value, please try again");
         }
-
-
-
     }
 }
