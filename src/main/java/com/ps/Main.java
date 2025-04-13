@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in); //scanner for all methods
-    static int userInput = 0;
+    static int userInput = 0; //make userInput global var
 
     public static void main(String[] args) {
         double interest; //declare interest
@@ -11,7 +11,6 @@ public class Main {
         //keep running the code till the users want to stop it
         while(userInput != 4) {
             menu(); //print menu options
-            //userInput = checkIntInput(); //get user input for which calculator
 
             //switch statement depending on user choice
             switch (userInput) {
@@ -30,22 +29,33 @@ public class Main {
                     System.out.print("What is your loan length in years: ");
                     int loanYrs = checkIntInput(); //user input loan length (in yrs) val
 
+                    /**
+                     * Calculates the monthly mortgage payment formula:
+                     *
+                     * Monthly Payment = P × [i(1 + i)^n] / [(1 + i)^n – 1]
+                     *
+                     * Where:
+                     * P = Principal amount
+                     * i = Monthly interest rate (annual interest rate / 12)
+                     * n = Total number of payments (loan term in months)
+                     */
                     double monthlyInterest = interest / 12; //interest per month
                     double monthlyPayment = principal * ((monthlyInterest) * Math.pow((1 + monthlyInterest), (loanYrs * 12)) / (Math.pow((1 + monthlyInterest), (loanYrs * 12)) - 1));
                     double totalInterest = (monthlyPayment * (loanYrs * 12)) - principal;
 
+                    //print summary of user input
                     System.out.println(
                             "\nSummary of Your Inputs:" +
                             "\nPrincipal: $" + principal +
                             "\nInterest Rate: " + (interest * 100) + "%" +
                             "\nLoan Length: " + loanYrs + " year(s)");
 
+                    //print result of user input
                     System.out.println("\nResults:");
                     System.out.printf("Your expected monthly payment: $%.2f", monthlyPayment);
                     System.out.printf("\nYour expected total interest paid: $%.2f", totalInterest);
 
-                    //If user want to run the calculator again
-                    tryAgain();
+                    tryAgain(); //Check if user want to run the calculator again
                     break;
                 case 2: //Future Value for CD
                     System.out.println("\n\n========================================================");
@@ -56,15 +66,26 @@ public class Main {
                     double deposit = checkDoubleInput(); //user input deposit val
 
                     System.out.print("What is your interest rate (percentage without %): ");
-                    interest = checkDoubleInput();
+                    interest = checkDoubleInput(); //user input interest val
                     interest = interest / 100; //convert interest from % to decimal
 
                     System.out.print("How many years: ");
                     int userYrs = checkIntInput(); //user input year val
 
+                    /**
+                     * Calculates the future value of a Certificate of Deposit (CD) using daily compounding:
+                     *
+                     * Future Value = P × [1 + (r / 365)]^(365 × t)
+                     *
+                     * Where:
+                     * P = Initial deposit
+                     * r = Annual interest rate (decimal)
+                     * t = Time in years
+                     */
                     double futureValue = deposit * Math.pow((1 + (interest / 365)), (365 * userYrs));
                     double totalInterestEarned = futureValue - deposit;
 
+                    //print summary of user input
                     System.out.print(
                             "\nSummary of Your Inputs:" +
                             "\nDeposit: $" + deposit +
@@ -72,15 +93,15 @@ public class Main {
                     System.out.printf("%.2f", (interest * 100));
                     System.out.println("%\nYear Length: " + userYrs + " year(s)");
 
+                    //print result of user input
                     System.out.println("\nResults:");
                     System.out.printf("Your Future Value: $%.2f", futureValue);
                     System.out.printf("\nTotal Interest Earned: $%.2f", totalInterestEarned);
 
-                    tryAgain();
+                    tryAgain(); //Check if user want to run the calculator again
                     break;
                 case 4: //quit user from program
-                    goodByeMessage();
-                    //System.out.println("Thanks for using Financial Calculators. Bye!");
+                    goodByeMessage(); //outro for user
                     break;
                 default:
                     System.out.println("Invalid input, please try again");
@@ -110,6 +131,7 @@ public class Main {
         }
     }
 
+    //Ask user if they want to continue using the program
     public static void tryAgain() {
         System.out.print("\n\nDo you want to use the calculator again? (yes/no): ");
 
@@ -119,6 +141,7 @@ public class Main {
             userChoice = scanner.nextLine().trim();
         }
 
+        //while loop to check valid user input & their choice to continue program
         while(true) {
             if (userChoice.equalsIgnoreCase("Yes") || userChoice.equalsIgnoreCase("Y")) {
                 break; //break out of loop statement
@@ -149,7 +172,6 @@ public class Main {
 
     //Check from checkIntInput method and pass to this method to convert to double
     public static double checkDoubleInput() {
-//        int checkedNum = checkIntInput(userInput); //pass in checkIntInput method
 
         String userInput = scanner.nextLine();
         while (!userInput.matches("\\d+(\\.\\d+)?")) { //regex for int n decimal val
@@ -159,6 +181,7 @@ public class Main {
         return Double.parseDouble(String.valueOf(userInput)); //return double value
     }
 
+    //Goodbye message
     public static void goodByeMessage() {
         System.out.println("Thanks for using Financial Calculators. Bye!");
     }

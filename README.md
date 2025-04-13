@@ -18,7 +18,7 @@
   * Term in years (compounded daily)
 
 # 📸 Screenshot of Outputs
-## Home Screen
+## 🖥️ Home Screen
 ![Home Page](images/homeScreen.png)
 
 ## 🏠 Mortgage Calculator
