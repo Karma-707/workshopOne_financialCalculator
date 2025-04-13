@@ -30,6 +30,7 @@
 # ⚠️ Error Handling
 ### 🔴 If the user enters an invalid value (e.g., letters instead of numbers), the program will display an error message and prompt them to try again.
 * 🟢 Green is user input
+
 ![Error Handling](/images/errorHandling.png)
 
 # 🧩 Fun Fact
@@ -37,5 +38,6 @@
 
 # 🧑‍💻 Author
 💻 Developed by: Meixin Zhang
+📅 Date: April 13th, 2025
 
 Created with ❤️ using Java.
