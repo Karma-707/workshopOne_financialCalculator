@@ -36,8 +36,6 @@ public class Main {
                     System.out.printf("\nYour expected total interest paid: $%.2f", totalInterest);
 
                     //If user want to run the calculator again
-                    System.out.print("\nDo you want to use the calculator again? (yes/no)");
-
                     tryAgain();
                     break;
                 case 2: //Future Value for CD
@@ -61,7 +59,8 @@ public class Main {
                     tryAgain();
                     break;
                 case 4: //quit user from program
-                    System.out.println("Thanks for using Financial Calculators. Bye!");
+                    goodByeMessage();
+                    //System.out.println("Thanks for using Financial Calculators. Bye!");
                     break;
                 default:
                     System.out.println("Invalid input, please try again");
@@ -88,19 +87,24 @@ public class Main {
     }
 
     public static void tryAgain() {
-        String userInput = scanner.nextLine();
+        System.out.print("\nDo you want to use the calculator again? (yes/no)");
+
+        String userChoice = scanner.nextLine();
+        while (userChoice.equals("")) {
+            userChoice = scanner.nextLine().trim();
+        }
 
         while(true) {
-            if (userInput.equalsIgnoreCase("Yes") || userInput.equalsIgnoreCase("Y")) {
+            if (userChoice.equalsIgnoreCase("Yes") || userChoice.equalsIgnoreCase("Y")) {
                 break; //break out of loop statement
-            } else if (userInput.equalsIgnoreCase("No") || userInput.equalsIgnoreCase("N")) {
-                Main.userInput = 4; //Jump to case 4 for the outro
-                break;
+            } else if (userChoice.equalsIgnoreCase("No") || userChoice.equalsIgnoreCase("N")) {
+                goodByeMessage(); //send goodByeMessage to user outro!
+                System.exit(0);
             }
             else { //all other outputs
                 System.out.println("Invalid input, please try again");
                 System.out.print("Do you want to use the calculator again? (yes/no)");
-                userInput = scanner.nextLine();
+                userChoice = scanner.nextLine();
             }
         }
     }
@@ -128,6 +132,10 @@ public class Main {
             userInput = scanner.nextLine();
         }
         return Double.parseDouble(String.valueOf(userInput)); //return double value
+    }
+
+    public static void goodByeMessage() {
+        System.out.println("Thanks for using Financial Calculators. Bye!");
     }
 
 }
