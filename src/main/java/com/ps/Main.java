@@ -16,22 +16,31 @@ public class Main {
             //switch statement depending on user choice
             switch (userInput) {
                 case 1: //Mortgage Calculator
-                    System.out.print(
-                            "\nWelcome to Mortgage Calculator!" +
-                            "\nWhat is your principal: $");
+                    System.out.println("\n\n===============================");
+                    System.out.println("Welcome to Mortgage Calculator!");
+                    System.out.println("===============================");
+
+                    System.out.print("What is your principal (without comma): $");
                     double principal = checkDoubleInput(); //user input principal val
 
                     System.out.print("What is your interest rate (percentage without %): ");
                     interest = checkDoubleInput(); //user input interest val
                     interest = interest / 100; //convert interest from % to decimal
 
-                    System.out.print("What is your loan length: ");
+                    System.out.print("What is your loan length in years: ");
                     int loanYrs = checkIntInput(); //user input loan length (in yrs) val
 
                     double monthlyInterest = interest / 12; //interest per month
                     double monthlyPayment = principal * ((monthlyInterest) * Math.pow((1 + monthlyInterest), (loanYrs * 12)) / (Math.pow((1 + monthlyInterest), (loanYrs * 12)) - 1));
                     double totalInterest = (monthlyPayment * (loanYrs * 12)) - principal;
 
+                    System.out.println(
+                            "\nSummary of Your Inputs:" +
+                            "\nPrincipal: $" + principal +
+                            "\nInterest Rate: " + (interest * 100) + "%" +
+                            "\nLoan Length: " + loanYrs + " year(s)");
+
+                    System.out.println("\nResults:");
                     System.out.printf("Your expected monthly payment: $%.2f", monthlyPayment);
                     System.out.printf("\nYour expected total interest paid: $%.2f", totalInterest);
 
@@ -39,8 +48,11 @@ public class Main {
                     tryAgain();
                     break;
                 case 2: //Future Value for CD
-                    System.out.print("\nWelcome to Future Value for CD!" +
-                            "\nWhat is your deposit: $");
+                    System.out.println("\n\n========================================================");
+                    System.out.println("Welcome to Future value for Certificate of Deposit (CD)!");
+                    System.out.println("========================================================");
+
+                    System.out.print("What is your deposit: $");
                     double deposit = checkDoubleInput(); //user input deposit val
 
                     System.out.print("What is your interest rate (percentage without %): ");
@@ -53,6 +65,14 @@ public class Main {
                     double futureValue = deposit * Math.pow((1 + (interest / 365)), (365 * userYrs));
                     double totalInterestEarned = futureValue - deposit;
 
+                    System.out.print(
+                            "\nSummary of Your Inputs:" +
+                            "\nDeposit: $" + deposit +
+                            "\nInterest Rate: ");
+                    System.out.printf("%.2f", (interest * 100));
+                    System.out.println("%\nYear Length: " + userYrs + " year(s)");
+
+                    System.out.println("\nResults:");
                     System.out.printf("Your Future Value: $%.2f", futureValue);
                     System.out.printf("\nTotal Interest Earned: $%.2f", totalInterestEarned);
 
@@ -71,10 +91,14 @@ public class Main {
 
     //Method that display Menu control of users//
     public static void menu() {
-        System.out.print("Welcome to Financial Calculator!\n" +
+        System.out.println("\n\n================================");
+        System.out.println("Welcome to Financial Calculator!");
+        System.out.println("================================");
+
+        System.out.print(
                 "Which calculator would you like to use?\n" +
                 "Press 1: Mortgage calculator\n" +
-                "Press 2: Future Value for CD\n" +
+                "Press 2: Future value for Certificate of Deposit (CD)\n" +
                 "Press 4: Quit\n" +
                 "Select Calculator: ");
 
@@ -87,8 +111,9 @@ public class Main {
     }
 
     public static void tryAgain() {
-        System.out.print("\nDo you want to use the calculator again? (yes/no)");
+        System.out.print("\n\nDo you want to use the calculator again? (yes/no): ");
 
+        //Eating the empty line
         String userChoice = scanner.nextLine();
         while (userChoice.equals("")) {
             userChoice = scanner.nextLine().trim();
@@ -103,7 +128,7 @@ public class Main {
             }
             else { //all other outputs
                 System.out.println("Invalid input, please try again");
-                System.out.print("Do you want to use the calculator again? (yes/no)");
+                System.out.print("Do you want to use the calculator again? (yes/no): ");
                 userChoice = scanner.nextLine();
             }
         }
